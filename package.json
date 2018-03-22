@@ -1,0 +1,24 @@
+{
+  "name": "simple-venn",
+  "version": "0.1.0",
+  "description": "Small package to create two-ring, area-proportional Venn diagrams.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run minify && webpack",
+    "minify": "webpack -p && mv ./dist/simple-venn.dist.js ./dist/simple-venn.min.js",
+    "watch": "webpack --watch"
+  },
+  "author": "Matthew Curtis",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.11.0"
+  }
+}

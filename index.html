@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SimpleVenn</title>
+  <style>
+    body {
+      margin: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+    }
+
+    .set {
+      opacity: 0.5;
+      border-radius: 100%;
+      position: fixed;
+      top: 50vh;
+      transform: translate(-50%, -50%);
+    }
+
+    #set1 {
+      background: #00F;
+    }
+
+    #set2 {
+      background: #0F0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="set1" class="set"></div>
+  <div id="set2" class="set"></div>
+</body>
+
+<script src="./dist/simple-venn.dist.js"></script>
+<script>
+  const count = 120000;
+  const venn = new SimpleVenn(count, count, count);
+  const set1 = document.getElementById('set1');
+  const set2 = document.getElementById('set2');
+  const xCenter = window.innerWidth / 2;
+  let animate = true;
+  let tick = 0;
+
+  set1.style.width = set1.style.height = venn.aSetDiameter + 'px';
+  set2.style.width = set2.style.height = venn.bSetDiameter + 'px';
+
+  loop();
+
+  function loop() {
+    tick++;
+    venn.uSetCount = count / 2 + Math.cos(tick / 50) * count / 2;
+    set1.style.left = xCenter - venn.aSetIntersectDist + 'px';
+    set2.style.left = xCenter + venn.bSetIntersectDist + 'px';
+
+    if (animate) {
+      window.requestAnimationFrame(loop);
+    }
+  }
+
+  document.body.addEventListener('click', () => {
+    animate = !animate;
+    if (animate) loop();
+  });
+</script>
+
+</html>
