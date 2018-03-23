@@ -15,7 +15,7 @@ export default class SimpleVenn {
     this._drawer    = new VennDrawer();
   }
 
-  setArea(set) {
+  _setArea(set) {
     let count = set + 'SetCount';
     let abs = Math.abs(this.scale);
 
@@ -27,41 +27,41 @@ export default class SimpleVenn {
   }
 
   get aSetArea() {
-    return this.setArea('a');
+    return this._setArea('a');
   }
 
   get bSetArea() {
-    return this.setArea('b');
+    return this._setArea('b');
   }
 
   get uSetArea() {
-    return this.setArea('u');
+    return this._setArea('u');
   }
 
-  setRadius(set) {
+  _setRadius(set) {
     let area = set + 'SetArea';
     return Math.sqrt(this[area] / Math.PI);
   }
 
   get aSetRadius() {
-    return this.setRadius('a');
+    return this._setRadius('a');
   }
 
   get bSetRadius() {
-    return this.setRadius('b');
+    return this._setRadius('b');
   }
 
-  setDiameter(set) {
+  _setDiameter(set) {
     let r = set + 'SetRadius';
     return this[r] * 2;
   }
 
   get aSetDiameter() {
-    return this.setDiameter('a');
+    return this._setDiameter('a');
   }
 
   get bSetDiameter() {
-    return this.setDiameter('b');
+    return this._setDiameter('b');
   }
 
   get setDistance() {
@@ -98,6 +98,7 @@ export default class SimpleVenn {
 
   draw(selector, options) {
     this._drawer.draw(this, selector, options);
+    return this;
   }
 
 }

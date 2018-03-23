@@ -126,8 +126,8 @@ var SimpleVenn = function () {
   }
 
   _createClass(SimpleVenn, [{
-    key: 'setArea',
-    value: function setArea(set) {
+    key: '_setArea',
+    value: function _setArea(set) {
       var count = set + 'SetCount';
       var abs = Math.abs(this.scale);
 
@@ -138,14 +138,14 @@ var SimpleVenn = function () {
       }
     }
   }, {
-    key: 'setRadius',
-    value: function setRadius(set) {
+    key: '_setRadius',
+    value: function _setRadius(set) {
       var area = set + 'SetArea';
       return Math.sqrt(this[area] / Math.PI);
     }
   }, {
-    key: 'setDiameter',
-    value: function setDiameter(set) {
+    key: '_setDiameter',
+    value: function _setDiameter(set) {
       var r = set + 'SetRadius';
       return this[r] * 2;
     }
@@ -157,37 +157,37 @@ var SimpleVenn = function () {
   }, {
     key: 'aSetArea',
     get: function get() {
-      return this.setArea('a');
+      return this._setArea('a');
     }
   }, {
     key: 'bSetArea',
     get: function get() {
-      return this.setArea('b');
+      return this._setArea('b');
     }
   }, {
     key: 'uSetArea',
     get: function get() {
-      return this.setArea('u');
+      return this._setArea('u');
     }
   }, {
     key: 'aSetRadius',
     get: function get() {
-      return this.setRadius('a');
+      return this._setRadius('a');
     }
   }, {
     key: 'bSetRadius',
     get: function get() {
-      return this.setRadius('b');
+      return this._setRadius('b');
     }
   }, {
     key: 'aSetDiameter',
     get: function get() {
-      return this.setDiameter('a');
+      return this._setDiameter('a');
     }
   }, {
     key: 'bSetDiameter',
     get: function get() {
-      return this.setDiameter('b');
+      return this._setDiameter('b');
     }
   }, {
     key: 'setDistance',
