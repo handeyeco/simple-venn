@@ -103,6 +103,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _helpers = __webpack_require__(2);
 
+var _VennDrawer = __webpack_require__(3);
+
+var _VennDrawer2 = _interopRequireDefault(_VennDrawer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SimpleVenn = function () {
@@ -115,6 +121,8 @@ var SimpleVenn = function () {
     this.bSetCount = bSetCount;
     this.uSetCount = uSetCount;
     this.scale = scale;
+
+    this._drawer = new _VennDrawer2.default();
   }
 
   _createClass(SimpleVenn, [{
@@ -140,6 +148,11 @@ var SimpleVenn = function () {
     value: function setDiameter(set) {
       var r = set + 'SetRadius';
       return this[r] * 2;
+    }
+  }, {
+    key: 'draw',
+    value: function draw(selector, options) {
+      this._drawer.draw(this, selector, options);
     }
   }, {
     key: 'aSetArea',
@@ -288,6 +301,116 @@ function circleOverlapArea(r1, r2, d) {
 function circleSegmentArea(r, width) {
   return r * r * Math.acos(1 - width / r) - (r - width) * Math.sqrt(width * (2 * r - width));
 }
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var VennDrawer = function () {
+  function VennDrawer() {
+    _classCallCheck(this, VennDrawer);
+
+    this.venn = null;
+    this.options = {
+      aSetColor: '#00F',
+      bSetColor: '#0F0',
+      opacity: 0.5
+    };
+  }
+
+  _createClass(VennDrawer, [{
+    key: 'draw',
+    value: function draw(venn, selector, options) {
+      var _this = this;
+
+      this.venn = venn;
+      this.options = Object.assign({}, this.options, options);
+
+      if (!selector) {
+        this.drawBody();
+        return;
+      }
+
+      var elements = document.querySelectorAll(selector);
+
+      elements.forEach(function (elem) {
+        return _this.drawVenn(elem);
+      });
+    }
+  }, {
+    key: 'drawBody',
+    value: function drawBody() {
+      document.body.style.width = '100vw';
+      document.body.style.height = '100vh';
+
+      this.drawVenn(document.body);
+    }
+  }, {
+    key: 'drawVenn',
+    value: function drawVenn(element) {
+      var canvas = element.nodeName === 'CANVAS' ? element : null;
+
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        element.appendChild(canvas);
+        // canvas.style.width = element.offsetWidth + 'px';
+        // canvas.style.height = element.offsetHeight + 'px';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+      }
+
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+
+      this.drawCanvas(canvas);
+    }
+  }, {
+    key: 'drawCanvas',
+    value: function drawCanvas(canvas) {
+      var ctx = canvas.getContext('2d');
+      var xCenter = canvas.offsetWidth / 2;
+      var yCenter = canvas.offsetHeight / 2;
+
+      var aCenter = {
+        x: xCenter - this.venn.aSetIntersectDist,
+        y: yCenter
+      };
+
+      var bCenter = {
+        x: xCenter + this.venn.bSetIntersectDist,
+        y: yCenter
+      };
+
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      ctx.globalAlpha = this.options.opacity;
+
+      ctx.fillStyle = this.options.aSetColor;
+      ctx.beginPath();
+      ctx.arc(aCenter.x, aCenter.y, this.venn.aSetRadius, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.fillStyle = this.options.bSetColor;
+      ctx.beginPath();
+      ctx.arc(bCenter.x, bCenter.y, this.venn.aSetRadius, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }]);
+
+  return VennDrawer;
+}();
+
+exports.default = VennDrawer;
 
 /***/ })
 /******/ ]);

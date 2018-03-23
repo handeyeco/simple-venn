@@ -2,6 +2,7 @@ import {
   bisect,
   circleOverlapArea,
 } from './helpers';
+import VennDrawer from './VennDrawer';
 
 export default class SimpleVenn {
 
@@ -10,6 +11,8 @@ export default class SimpleVenn {
     this.bSetCount = bSetCount;
     this.uSetCount = uSetCount;
     this.scale     = scale;
+
+    this._drawer    = new VennDrawer();
   }
 
   setArea(set) {
@@ -91,6 +94,10 @@ export default class SimpleVenn {
 
   get bSetIntersectDist() {
     return this.setDistance - this.aSetIntersectDist;
+  }
+
+  draw(selector, options) {
+    this._drawer.draw(this, selector, options);
   }
 
 }
