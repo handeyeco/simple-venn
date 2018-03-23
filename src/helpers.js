@@ -1,15 +1,13 @@
-// Finds the zeros of a function, given two starting points
-// (which must have opposite signs)
+// From https://github.com/benfred/venn.js
+
+// Finds the zeros of a function
+// given two starting points
 export function bisect(f, a, b) {
   const maxIterations = 100;
   const tolerance = 1e-10;
   const fA = f(a);
   const fB = f(b);
   let delta = b - a;
-
-  if (fA * fB > 0) {
-    throw "Initial bisect points must have opposite signs";
-  }
 
   if (fA === 0) return a;
   if (fB === 0) return b;

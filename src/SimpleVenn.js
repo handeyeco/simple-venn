@@ -17,7 +17,6 @@ export default class SimpleVenn {
 
   _setArea(set) {
     let count = set + 'SetCount';
-
     return this[count] * this.scale;
   }
 
@@ -70,6 +69,8 @@ export default class SimpleVenn {
       return Math.abs(r1 - r2);
     }
 
+    // We loop on an ever-decreasing distance between sets
+    // until we have an approximate overlap area that matches the count
     return bisect((dist) => circleOverlapArea(r1, r2, dist) - uArea, 0, r1 + r2);
   }
 
@@ -82,6 +83,7 @@ export default class SimpleVenn {
       return d;
     }
 
+    // See http://mathworld.wolfram.com/Circle-CircleIntersection.html
     let num = d * d - r1 * r1 + r2 * r2;
     let den = 2 * d;
     return num / den;
