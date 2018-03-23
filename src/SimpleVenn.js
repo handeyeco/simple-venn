@@ -17,13 +17,8 @@ export default class SimpleVenn {
 
   _setArea(set) {
     let count = set + 'SetCount';
-    let abs = Math.abs(this.scale);
 
-    if (this.scale < 0) {
-      return this[count] / abs;
-    } else {
-      return this[count] * abs;
-    }
+    return this[count] * this.scale;
   }
 
   get aSetArea() {

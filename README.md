@@ -21,7 +21,7 @@ However I wanted simple-venn to be...simple. So it has some built-in drawing fun
   var aSet = 120000;
   var bSet = 120000;
   var uSet = 60000;
-  var scale = -2;
+  var scale = 0.5;
   // Appends canvas element to body and draws Venn
   new SimpleVenn(aSet, bSet, uSet, scale).draw();
 </script>
