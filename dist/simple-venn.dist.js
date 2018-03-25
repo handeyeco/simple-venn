@@ -129,13 +129,7 @@ var SimpleVenn = function () {
     key: '_setArea',
     value: function _setArea(set) {
       var count = set + 'SetCount';
-      var abs = Math.abs(this.scale);
-
-      if (this.scale < 0) {
-        return this[count] / abs;
-      } else {
-        return this[count] * abs;
-      }
+      return this[count] * this.scale;
     }
   }, {
     key: '_setRadius',
@@ -153,6 +147,7 @@ var SimpleVenn = function () {
     key: 'draw',
     value: function draw(selector, options) {
       this._drawer.draw(this, selector, options);
+      return this;
     }
   }, {
     key: 'aSetArea',
@@ -202,6 +197,8 @@ var SimpleVenn = function () {
         return Math.abs(r1 - r2);
       }
 
+      // We loop on an ever-decreasing distance between sets
+      // until we have an approximate overlap area that matches the count
       return (0, _helpers.bisect)(function (dist) {
         return (0, _helpers.circleOverlapArea)(r1, r2, dist) - uArea;
       }, 0, r1 + r2);
@@ -217,6 +214,7 @@ var SimpleVenn = function () {
         return d;
       }
 
+      // See http://mathworld.wolfram.com/Circle-CircleIntersection.html
       var num = d * d - r1 * r1 + r2 * r2;
       var den = 2 * d;
       return num / den;
@@ -245,18 +243,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.bisect = bisect;
 exports.circleOverlapArea = circleOverlapArea;
-// Finds the zeros of a function, given two starting points
-// (which must have opposite signs)
+// From https://github.com/benfred/venn.js
+
+// Finds the zeros of a function
+// given two starting points
 function bisect(f, a, b) {
   var maxIterations = 100;
   var tolerance = 1e-10;
   var fA = f(a);
   var fB = f(b);
   var delta = b - a;
-
-  if (fA * fB > 0) {
-    throw "Initial bisect points must have opposite signs";
-  }
 
   if (fA === 0) return a;
   if (fB === 0) return b;
@@ -329,6 +325,10 @@ var VennDrawer = function () {
     };
   }
 
+  // Triage drawing responsibility
+  // depending on selector
+
+
   _createClass(VennDrawer, [{
     key: 'draw',
     value: function draw(venn, selector, options) {
@@ -343,7 +343,6 @@ var VennDrawer = function () {
       }
 
       var elements = document.querySelectorAll(selector);
-
       elements.forEach(function (elem) {
         return _this.drawVenn(elem);
       });
@@ -364,12 +363,11 @@ var VennDrawer = function () {
       if (!canvas) {
         canvas = document.createElement('canvas');
         element.appendChild(canvas);
-        // canvas.style.width = element.offsetWidth + 'px';
-        // canvas.style.height = element.offsetHeight + 'px';
         canvas.style.width = '100%';
         canvas.style.height = '100%';
       }
 
+      // Make sure things look good on retina
       canvas.width = canvas.offsetWidth * window.devicePixelRatio;
       canvas.height = canvas.offsetHeight * window.devicePixelRatio;
 
@@ -379,27 +377,30 @@ var VennDrawer = function () {
     key: 'drawCanvas',
     value: function drawCanvas(canvas) {
       var ctx = canvas.getContext('2d');
+
+      // Position set centers
       var xCenter = canvas.offsetWidth / 2;
       var yCenter = canvas.offsetHeight / 2;
-
       var aCenter = {
         x: xCenter - this.venn.aSetIntersectDist,
         y: yCenter
       };
-
       var bCenter = {
         x: xCenter + this.venn.bSetIntersectDist,
         y: yCenter
       };
 
+      // Make sure things look good on retina
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
       ctx.globalAlpha = this.options.opacity;
 
+      // Draw set A
       ctx.fillStyle = this.options.aSetColor;
       ctx.beginPath();
       ctx.arc(aCenter.x, aCenter.y, this.venn.aSetRadius, 0, 2 * Math.PI);
       ctx.fill();
 
+      // Draw set B
       ctx.fillStyle = this.options.bSetColor;
       ctx.beginPath();
       ctx.arc(bCenter.x, bCenter.y, this.venn.aSetRadius, 0, 2 * Math.PI);
