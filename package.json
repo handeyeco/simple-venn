@@ -1,7 +1,16 @@
 {
   "name": "simple-venn",
-  "keywords": ["simple", "venn", "diagram", "graph", "chart", "math", "javascript", "web"],
-  "version": "0.2.0",
+  "keywords": [
+    "simple",
+    "venn",
+    "diagram",
+    "graph",
+    "chart",
+    "math",
+    "javascript",
+    "web"
+  ],
+  "version": "0.2.1",
   "description": "Small package to create two-ring, area-proportional Venn diagrams.",
   "main": "index.js",
   "scripts": {
