@@ -1,5 +1,6 @@
 {
   "name": "simple-venn",
+  "keywords": ["simple", "venn", "diagram", "graph", "chart", "math", "javascript", "web"],
   "version": "0.2.0",
   "description": "Small package to create two-ring, area-proportional Venn diagrams.",
   "main": "index.js",
@@ -9,6 +10,7 @@
     "watch": "webpack --watch"
   },
   "author": "Matthew Curtis",
+  "repository": "github:matthewbryancurtis/simple-venn",
   "license": "MIT",
   "babel": {
     "presets": [
