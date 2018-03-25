@@ -1,7 +1,5 @@
 # simple-venn
 
-**PSA: simple-venn is just something thrown together for a project. There are no guarentees that it's stable. Contributions and bug reports welcomed.**
-
 simple-venn is a tiny JavaScript library for area-proportional, two-ringed Venn diagrams. A lot of the math in this library is pulled from benfred's [Venn.js](https://github.com/benfred/venn.js) library - a great library for Venn diagrams with 3+ sets, but overkill for what I needed.
 
 simple-venn was created with the end goal of giving developers access to the underlying dimensions of the Venn diagram. In the `/examples` directory, you'll see that simple-venn can be used with canvas or regular divs. I personally made it to be used with [regl](https://github.com/regl-project/regl). It should give you all the math to position the sets as you see fit.
@@ -88,7 +86,7 @@ If a selector is not provided, simple-venn will append a canvas element to the b
 The options object will look for these properties:
 
 | property | Type | description |
-| --- | --- |
+| --- | --- | --- |
 | aSetColor (optional) | String | The color of set A (default: '#00F') |
 | bSetColor (optional) | String | The color of set B (default: '#0F0') |
 | opacity (optional) | Number | The opacity of each set (default: 0.5) |
