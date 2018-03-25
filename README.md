@@ -1,5 +1,7 @@
 # simple-venn
 
+[View the examples](http://matthewbryancurtis.com/simple-venn/)
+
 simple-venn is a tiny JavaScript library for area-proportional, two-ringed Venn diagrams. A lot of the math in this library is pulled from benfred's [Venn.js](https://github.com/benfred/venn.js) library - a great library for Venn diagrams with 3+ sets, but overkill for what I needed.
 
 simple-venn was created with the end goal of giving developers access to the underlying dimensions of the Venn diagram. In the `/examples` directory, you'll see that simple-venn can be used with canvas or regular divs. I personally made it to be used with [regl](https://github.com/regl-project/regl). It should give you all the math to position the sets as you see fit.
