@@ -76,7 +76,7 @@ export default class VennDrawer {
     // Draw set B
     ctx.fillStyle = this.options.bSetColor;
     ctx.beginPath();
-    ctx.arc(bCenter.x, bCenter.y, this.venn.aSetRadius, 0, 2 * Math.PI);
+    ctx.arc(bCenter.x, bCenter.y, this.venn.bSetRadius, 0, 2 * Math.PI);
     ctx.fill();
   }
 

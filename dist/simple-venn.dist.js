@@ -210,7 +210,7 @@ var SimpleVenn = function () {
       }
 
       // See http://mathworld.wolfram.com/Circle-CircleIntersection.html
-      var num = d * d - r1 * r1 + r2 * r2;
+      var num = d * d - r2 * r2 + r1 * r1;
       var den = 2 * d;
       return num / den;
     }
@@ -398,7 +398,7 @@ var VennDrawer = function () {
       // Draw set B
       ctx.fillStyle = this.options.bSetColor;
       ctx.beginPath();
-      ctx.arc(bCenter.x, bCenter.y, this.venn.aSetRadius, 0, 2 * Math.PI);
+      ctx.arc(bCenter.x, bCenter.y, this.venn.bSetRadius, 0, 2 * Math.PI);
       ctx.fill();
     }
   }]);

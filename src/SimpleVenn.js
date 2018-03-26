@@ -84,7 +84,7 @@ export default class SimpleVenn {
     }
 
     // See http://mathworld.wolfram.com/Circle-CircleIntersection.html
-    let num = d * d - r1 * r1 + r2 * r2;
+    let num = d * d - r2 * r2 + r1 * r1;
     let den = 2 * d;
     return num / den;
   }
