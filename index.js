@@ -1,2 +1,2 @@
-import SimpleVenn from './src/SimpleVenn';
-module.exports = SimpleVenn;
+var SimpleVenn = require('./src/SimpleVenn');
+module.exports = SimpleVenn.default;

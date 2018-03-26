@@ -80,13 +80,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var _SimpleVenn = __webpack_require__(1);
-
-var _SimpleVenn2 = _interopRequireDefault(_SimpleVenn);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = _SimpleVenn2.default;
+var SimpleVenn = __webpack_require__(1);
+module.exports = SimpleVenn.default;
 
 /***/ }),
 /* 1 */
